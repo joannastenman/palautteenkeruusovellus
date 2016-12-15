@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link href="https://fonts.googleapis.com/css?family=Cabin" rel="stylesheet">
+<title>Kysely</title>
+
+<!-- Bootstrap -->
+<link href="css/bootstrap.css" rel="stylesheet">
+
+ <script type = "text/javascript" 
+         src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+		
+      <script type = "text/javascript" language = "javascript">
+       $(document).ready(function() { 
+	  
+		$.getJSON('http://proto434.haaga-helia.fi:8080/testo/survey/2/questions', function(jd) {
+				  $('#otsikko').html('<p>' + jd.radioList[0].name + '</p>');
+                  $('#yes').append('<p>' + jd.radioList[0].options[0].name + '</p>');
+                  $('#no').append('<p> ' + jd.radioList[0].options[1].name + '</p>');
+               });
+
+		});
+		
+	/*	
+		
+		var data = {
+		answers: {
+			radioAnswers: [
+				{
+					value:"2",
+					radio_id:"1"
+				}
+			],
+			checkAnswers: [
+				{
+					value:"1",
+					check_id:"1"
+				},
+				{
+					value:"2",
+					check_id:"2"
+				}
+			],
+			textAnswers: [
+				{
+					text_id:"1",
+					value:"Answer to a text question"
+				}
+			]
+		}
+	};
+	
+	$(function(){
+		$.ajax({
+			url: 'http://localhost:8080/testo/survey/{survey_id}/answers',
+			method: 'POST',
+			data: JSON.stringify(data),
+			success: function(data){
+				alert(JSON.stringify(data));
+			}
+		});
+	});
+	*/
+	
+	function send(){
+		
+		var value = $("input[name=RadioGroup1]:checked").val();
+		var data = {
+			answers: {
+				radioAnswers: [
+					{
+						value: value,
+						radio_id: 2
+					}
+				]
+			}
+		};
+		
+		$.ajax({
+			url: 'http://proto434.haaga-helia.fi:8080/testo/survey/2/answers',
+			method: 'POST',
+			data: JSON.stringify(data),
+			success: function(data){
+				alert('Vastaus lisätty!');
+			},
+			error: function(e){
+				alert(JSON.stringify(e));
+			}
+		});
+
+	}
+
+		
+		
+		
+</script> 
+</head>
+<body>
+<nav class="navbar navbar-default" style="background-color:#D0E5F8;">
+  <div class="container-fluid"> 
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#defaultNavbar1"><span class="sr-only"></span><span class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span></button>
+      <a class="navbar-brand" href="#"></a></div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="defaultNavbar1">
+      <ul class="nav navbar-nav">
+       </ul>
+       
+    </div>
+    <!-- /.navbar-collapse --> 
+  </div>
+  <!-- /.container-fluid -->
+</nav>
+
+<!-- ------------------------------------------------------------------------- -->
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3" style="text-align:center;">
+    
+      <h1 class="text-center" style="font-family:'Cabin',sans-serif;font-size:40px;">Palautekysely</h1>
+      <br>
+  
+      <br>
+    </div>
+  </div>
+  <hr>
+</div>
+<!-- ------------------------------------------------------------------------- -->
+<div class="container">
+  <div class="row text-center">
+  
+<!--- 
+  <h4>Kyselyt:</h4>
+  <input type = "button" id = "driver" value = "Hae kyselyt" />
+   <p>
+   <button id="latausnappi">Lataa</button><button id="tyhjennysnappi">Tyhjennä</button>
+   </p>
+   <div id="lista"></div>
+   -->
+   
+  <hr>
+  <br>
+<h3 id="otsikko" style="font-size:30px;"></h3>
+<br>
+ <p> 
+   <label id="yes">
+     <input type="radio" name="RadioGroup1" value="1" id="RadioGroup1_0">
+     </label>
+  &nbsp;
+  &nbsp;
+  &nbsp;
+   &nbsp;
+   <label id="no">
+     <input type="radio" name="RadioGroup1" value="0" id="RadioGroup1_1">
+     </label>
+   <br>
+   <br>
+ </p>
+ <button type="submit" onClick="send()" style="width:100px; height:50px; font-size:20px;">Lähetä</button>
+  </div>
+  <br>
+  <br>
+   <hr> 
+ 
+  <div class="row">
+    <div class="text-justify col-sm-4" style="text-align:center;"> 
+   
+  
+    
+    </div>
+   
+   
+  <!-- 
+   <div class="col-sm-4 text-justify" style="text-align:center;"> 
+   <strong><button onClick="alert('Kirjaudu')">Luo kysely</button></strong>
+
+
+
+   </div>
+    
+    
+   <div class="col-sm-4 text-justify" style="text-align:center;"> 
+  
+   </div> -->
+   
+  </div>
+ <!--  ------------------- 
+  <hr>
+  <div class="row">
+    <div class="text-center col-md-12">
+      <div class="well"><strong>Kommentteja:</strong>
+      <br>
+      <textarea></textarea>
+      <br>
+      <input type="submit">
+      </div>
+    </div>
+  </div>
+
+  
+  <hr>
+  <div class="row">
+    <div class="text-center col-md-6 col-md-offset-3">
+      <h5>Palautekysely 2016</h5>
+      
+      <img src="image/testologo_official.jpg" style="height:170px;">
+    </div>
+  </div>-->
+ 
+</div>
+
+ <hr>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) --> 
+<script src="js/jquery-1.11.3.min.js"></script>
+
+<!-- Include all compiled plugins (below), or include individual files as needed --> 
+<script src="js/bootstrap.js"></script>
+
+
+
+</body>
+<footer>
+<div class="text-center col-md-6 col-md-offset-3">
+      <h5>Palautekysely 2016</h5>
+      
+      <img src="image/testologo_official.jpg" style="height:170px;">
+    </div>
+    </footer>
+</html>
